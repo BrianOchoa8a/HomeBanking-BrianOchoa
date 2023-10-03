@@ -18,7 +18,7 @@ class HomebankingApplication {
 			System.out.println("Hola");
 
 			Client client = new Client("brian", "Ochoa", "brianezequiel@gmail.com");
-			
+
 			clientRepository.save(client);
 			System.out.println(client);
 			System.out.println("hola");
