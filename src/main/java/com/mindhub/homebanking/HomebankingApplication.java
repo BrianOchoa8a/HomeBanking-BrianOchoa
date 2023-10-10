@@ -2,8 +2,11 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.models.Transaction;
+import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.repositories.TransactionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,13 +14,17 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 
+import static com.mindhub.homebanking.models.TransactionType.CREDIT;
+import static com.mindhub.homebanking.models.TransactionType.DEBIT;
+
 @SpringBootApplication
 class HomebankingApplication {
+
 	public static void main(String[] args){
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository){
 		return args -> {
 			System.out.println("Hola");
 
@@ -26,8 +33,6 @@ class HomebankingApplication {
 
 			Client client2 = new Client("brian", "Ochoa", "brianezequiel@gmail.com");
 			clientRepository.save(client2);
-
-
 
 
 			Account account1 = new Account("texto", LocalDate.now(), 5000.00);
@@ -39,10 +44,37 @@ class HomebankingApplication {
 			accountRepository.save(account2);
 
 
+			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDate.now() );
+			account1.addTransaction(transaction1);
+			transactionRepository.save(transaction1);
+
+			Transaction transaction2 = new Transaction(CREDIT, -35.00, "Car Fee", LocalDate.now() );
+			account1.addTransaction(transaction2);
+			transactionRepository.save(transaction2);
+
+			Transaction transaction3 = new Transaction(DEBIT, 4350.00, "Netflix", LocalDate.now() );
+			account1.addTransaction(transaction3);
+			transactionRepository.save(transaction3);
+
+			Transaction transaction4 = new Transaction(DEBIT, 4350.00, "Transferencia", LocalDate.now() );
+			account2.addTransaction(transaction4);
+			transactionRepository.save(transaction4);
+
+			Transaction transaction5 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDate.now() );
+			account2.addTransaction(transaction5);
+			transactionRepository.save(transaction5);
+
+			Transaction transaction6 = new Transaction(DEBIT, 4350.00, "Deposit", LocalDate.now() );
+			account2.addTransaction(transaction6);
+			transactionRepository.save(transaction6);
+
+
 			System.out.println(client);
 			System.out.println(account1);
 			System.out.println(account2);
+			System.out.println(transaction1);
 
 		};
 	}
+
 }

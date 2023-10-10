@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 
 public class ClientDTO{
-        long id;
+        private Long id;
         private String firstName;
         private String lastName;
         private String email;
