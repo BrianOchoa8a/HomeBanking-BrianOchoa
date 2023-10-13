@@ -9,7 +9,7 @@ public class ClientLoanDTO {
     private Double amount;
     private Integer payments;
 
-    //CONSTRUCTOR
+
     public ClientLoanDTO(ClientLoan clientLoan) {
         this.id = clientLoan.getId();
         this.loanId = clientLoan.getLoan().getId();
@@ -18,7 +18,7 @@ public class ClientLoanDTO {
         this.payments = clientLoan.getPayments();
     }
 
-    //GETTERS
+
     public Long getId() {
         return id;
     }

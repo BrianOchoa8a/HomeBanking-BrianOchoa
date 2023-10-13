@@ -32,11 +32,9 @@ public class Client {
     public Client() { }
 
     public Client(String first, String last, String email) {
-        this.id=null;
         this.firstName = first;
         this.lastName = last;
         this.email = email;
-
     }
 
     public String getFirstName() {
@@ -72,26 +70,9 @@ public class Client {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", Email='" + email + '\'' +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
 
     public List<Loan> getLoans() {
         return clientLoans.stream().map(e -> e.getLoan()).collect(Collectors.toList());
