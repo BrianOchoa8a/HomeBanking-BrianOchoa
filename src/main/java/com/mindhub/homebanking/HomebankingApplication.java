@@ -1,11 +1,9 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
+import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.repositories.LoansRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.mindhub.homebanking.models.TransactionType.CREDIT;
 import static com.mindhub.homebanking.models.TransactionType.DEBIT;
@@ -24,7 +23,7 @@ class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoansRepository loansRepository){
 		return args -> {
 			System.out.println("Hola");
 
@@ -33,6 +32,15 @@ class HomebankingApplication {
 
 			Client client2 = new Client("brian", "Ochoa", "brianezequiel@gmail.com");
 			clientRepository.save(client2);
+
+			Loan loan1 = new Loan( "brian", 15.00,List.of(2,3,5));
+			loansRepository.save(loan1);
+
+
+			Loan loan2 =new Loan("Mica", 20.00, List.of(4,5,6));
+			loansRepository.save(loan2);
+
+
 
 
 			Account account1 = new Account("texto", LocalDate.now(), 5000.00);
@@ -67,6 +75,9 @@ class HomebankingApplication {
 			Transaction transaction6 = new Transaction(DEBIT, 4350.00, "Deposit", LocalDate.now() );
 			account2.addTransaction(transaction6);
 			transactionRepository.save(transaction6);
+
+
+
 
 
 			System.out.println(client);
