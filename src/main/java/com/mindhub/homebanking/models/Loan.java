@@ -26,7 +26,7 @@ public class Loan {
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
-    //CONSTRUCTORS
+
     public Loan() {
     }
 
@@ -36,12 +36,12 @@ public class Loan {
         this.payments = payments;
     }
 
-    //GETTER ID
+
     public Long getId() {
         return id;
     }
 
-    //GETTERS & SETTERS
+
     public String getName() {
         return name;
     }
@@ -66,7 +66,7 @@ public class Loan {
         this.payments = payments;
     }
 
-    //GETTER @OneToMany
+
     public List<Client> getClients() {
         return clientLoans.stream().map(e -> e.getClient()).collect(Collectors.toList());
     }
@@ -74,7 +74,7 @@ public class Loan {
         return clientLoans;
     }
 
-    //FUNCTION TO LINK
+
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);

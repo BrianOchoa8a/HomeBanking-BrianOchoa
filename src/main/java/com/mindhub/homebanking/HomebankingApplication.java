@@ -1,10 +1,7 @@
 package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.LoansRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +20,7 @@ class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoansRepository loansRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoansRepository loansRepository, ClientLoanRepository clientLoanRepository){
 		return args -> {
 			System.out.println("Hola");
 
@@ -33,13 +30,15 @@ class HomebankingApplication {
 			Client client2 = new Client("brian", "Ochoa", "brianezequiel@gmail.com");
 			clientRepository.save(client2);
 
-			Loan loan1 = new Loan( "brian", 15.00,List.of(2,3,5));
+			Loan loan1 = new Loan( "mortgage", 500.000,List.of(12,24,36,48,60));
 			loansRepository.save(loan1);
 
 
-			Loan loan2 =new Loan("Mica", 20.00, List.of(4,5,6));
+			Loan loan2 =new Loan("Peronal", 100.000, List.of(6,12,24));
 			loansRepository.save(loan2);
 
+			Loan loan3 =new Loan("Automotive", 300.000, List.of(6,12,24,36));
+			loansRepository.save(loan3);
 
 
 
@@ -50,6 +49,29 @@ class HomebankingApplication {
 			Account account2 = new Account("texto2", LocalDate.now().plusDays(1), 7500.00);
 			client.addAccount(account2);
 			accountRepository.save(account2);
+
+			ClientLoan melbaL1 = new ClientLoan(400000.00, 60);
+			client.addClientLoan(melbaL1);
+			loan1.addClientLoan(melbaL1);
+			clientLoanRepository.save(melbaL1);
+
+			ClientLoan melbaL2 = new ClientLoan(50.000, 12);
+			client.addClientLoan(melbaL2);
+			loan2.addClientLoan(melbaL2);
+			clientLoanRepository.save(melbaL2);
+
+			ClientLoan brianL1 = new ClientLoan(100000.00, 24);
+			client2.addClientLoan(brianL1);
+			loan2.addClientLoan(brianL1);
+			clientLoanRepository.save(brianL1);
+
+			ClientLoan brianL2 = new ClientLoan(200.000, 36);
+			client2.addClientLoan(brianL2);
+			loan3.addClientLoan(brianL2);
+			clientLoanRepository.save(brianL2);
+
+
+
 
 
 			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDate.now() );

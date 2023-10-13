@@ -17,9 +17,11 @@ createApp({
     loadData(){
         axios.get('/api/clients/1')
         .then( ({data}) => {
-            this.accounts = data.accounts;
+          console.log(data);
+
+             this.accounts = data.accounts;
             this.name = data.firstName;
-            this.loans = data.loans;
+            // this.loans = data.loans;
         })
         .catch(err => console.log(err))
     },

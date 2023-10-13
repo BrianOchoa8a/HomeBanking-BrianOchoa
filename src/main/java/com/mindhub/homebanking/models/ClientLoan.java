@@ -22,7 +22,7 @@ public class ClientLoan {
     @JoinColumn(name = "loan_id")
     private Loan loan;
 
-    //CONSTRUCTORS
+
     public ClientLoan() {
     }
     public ClientLoan(Double amount, Integer payments) {
@@ -30,12 +30,12 @@ public class ClientLoan {
         this.payments = payments;
     }
 
-    //GETTER ID
+
     public Long getId() {
         return id;
     }
 
-    //GETTERS & SETTERS
+
     public Double getAmount() {
         return amount;
     }
@@ -52,7 +52,6 @@ public class ClientLoan {
         this.payments = payments;
     }
 
-    //GETTERS & SETTERS @ManyToOne
     public Client getClient() {
         return client;
     }
