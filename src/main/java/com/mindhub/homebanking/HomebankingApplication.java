@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.mindhub.homebanking.models.CardColor.GOLD;
+import static com.mindhub.homebanking.models.CardColor.TITANIUM;
 import static com.mindhub.homebanking.models.TransactionType.CREDIT;
 import static com.mindhub.homebanking.models.TransactionType.DEBIT;
 
@@ -20,7 +22,7 @@ class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loansRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loansRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return args -> {
 			System.out.println("Hola");
 
@@ -42,11 +44,11 @@ class HomebankingApplication {
 
 
 
-			Account account1 = new Account("texto", LocalDate.now(), 5000.00);
+			Account account1 = new Account("VIN001", LocalDate.now(), 5000.00);
 			client.addAccount(account1);
 			accountRepository.save(account1);
 
-			Account account2 = new Account("texto2", LocalDate.now().plusDays(1), 7500.00);
+			Account account2 = new Account("VIN002", LocalDate.now().plusDays(1), 7500.00);
 			client.addAccount(account2);
 			accountRepository.save(account2);
 
@@ -70,9 +72,17 @@ class HomebankingApplication {
 			loan3.addClientLoan(brianL2);
 			clientLoanRepository.save(brianL2);
 
+			Card card1 = new Card(client.getFirstName(),CardType.CREDIT,GOLD,111222333, 123,LocalDate.now(),LocalDate.now());
+			client.addCards(card1);
+			cardRepository.save(card1);
 
+			Card card2 = new Card(client.getFirstName(),CardType.DEBIT,TITANIUM,444555666, 321,LocalDate.now(),LocalDate.now());
+			client.addCards(card2);
+			cardRepository.save(card2);
 
-
+			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,111222333, 123,LocalDate.now(),LocalDate.now());
+			client2.addCards(card3);
+			cardRepository.save(card3);
 
 			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDate.now() );
 			account1.addTransaction(transaction1);
