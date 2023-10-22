@@ -3,7 +3,8 @@ let { createApp } = Vue;
 createApp({
   data() {
     return {
-
+      cardCredit:[],
+      cardDebit:[]
     };
   },
 

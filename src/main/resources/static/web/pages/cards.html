@@ -33,9 +33,46 @@
   <div class="d-flex justify-content-center g-col-6 style-title">
     <h1>CARDS</h1>
   </div>
-    <main>
-        
-    </main>
+  <main class="d-flex justify-content-around align-items-center">
+
+    <section class="d-flex flex-column">
+        <h2 class="pt-4">Credit Card</h2>
+        <div class="d-flex flex-column gap-4 align-items-center m-3 containerCard">
+            <div v-if="cardCredit.length != 0" v-for="card of cardCredit " class="card" style="width: 18rem;">
+                <div class="card-body ">
+                    <h3 class="card-title textCard">{{card.cardHolder}}</h3>
+                    <h4 class="card-subtitle mb-2 text-body-secondary textCard">{{card.number}}</h4>
+                    <h5 class="card-subtitle mb-2 text-body-secondary textCard">{{card.thruDate}}</h5>
+                    <h5 class="card-subtitle mb-2 text-body-secondary textCard">{{card.cvv}}</h5>
+                </div>
+            </div>
+            <div v-else>
+                <h3>No credit cards</h3>
+            </div>
+        </div>
+    </section>
+
+    <section  class="d-flex flex-column">
+        <h2 class="pt-4">Debit Card</h2>
+        <div class="d-flex flex-column gap-4 align-items-center m-3 containerCard">
+            <div v-if="cardDebit.length != 0" v-for="card of cardDebit " class="card" style="width: 18rem;">
+                <div class="card-body ">
+                    <h3 class="card-title textCard">{{card.cardHolder}}</h3>
+                    <h4 class="card-subtitle mb-2 text-body-secondary textCard">{{card.number}}</h4>
+                    <h5 class="card-subtitle mb-2 text-body-secondary textCard">{{card.thruDate}}</h5>
+                    <h5 class="card-subtitle mb-2 text-body-secondary textCard">{{card.cvv}}</h5>
+                </div>
+            </div>
+            <div v-else>
+                <h3>No debit cards</h3>
+            </div>
+        </div>
+    </section>
+
+
+
+</main>
+
   <footer>
     <nav class="navbar bg-dark border-bottom border-body d-flex justify-content-center style-margin"
       data-bs-theme="dark">
