@@ -1,14 +1,14 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.ClientDTO;
-import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.ClientRepository;
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +20,9 @@ public class ClientController {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @RequestMapping("/clients")
@@ -39,6 +42,27 @@ public class ClientController {
     @RequestMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientRepository.findById(id).map(ClientDTO::new).orElse(null);
+    }
+    @PostMapping("/clients")
+    public ResponseEntity<Object> newClient(
+            @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
+
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        }
+
+        if (clientRepository.findByEmail(email) != null) {
+            return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
+        }
+
+        Client client = new Client(firstName,lastName,email, passwordEncoder.encode(password), false);
+        clientRepository.save(client);
+        return new ResponseEntity<>("Client created successfully", HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/clients/currents")
+    public ClientDTO getClientCurrent(Authentication authentication){
+        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
 
 }
