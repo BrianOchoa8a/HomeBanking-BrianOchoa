@@ -1,3 +1,7 @@
+body{
+    background-color: #EBE4D1;
+}
+
 .img-style{
     width: 20rem;
 }
@@ -19,6 +23,9 @@
 
 .img-footer{
     width: 10rem;
+}
+.img-card{
+    width: 50rem;
 }
 .style-redes{
     width: 2rem;
@@ -46,4 +53,30 @@
 
 .credit{
     color: green;
+}
+
+.bg-color{
+
+    background-color: #3D30A2;
+    border-bottom-right-radius: 30rem ;
+    border-bottom-left-radius: 30rem ;
+}
+.bg-color2{
+
+    background-color: #3D30A2;
+    border-top-right-radius: 30rem ;
+    border-top-left-radius: 30rem ;
+
+}
+
+.bg-nav{
+    background-color: #190482;
+}
+
+.margin-login{
+    margin-bottom: 5rem;
+}
+.w-logout{
+width: 5rem;
+margin-top: 1rem;
 }

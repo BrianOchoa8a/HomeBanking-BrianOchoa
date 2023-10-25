@@ -9,13 +9,24 @@
 </head>
 <body>
     <div id="app">
-    <div class="d-flex justify-content-center">
-        <img class="img-style" src="../images/MONEYpng.png" alt="" />
+      <div>
+        <div class="d-flex justify-content-center bg-color">
+          <img class="img-style  bg-light rounded-circle m-4 " src="../images/MONEYpng.png" alt="" />
+        </div>
+        <div class="d-flex justify-content-center">
+        </div>
+        <div class="d-flex justify-content-center">
+          <nav class="navbar bg-nav border-bottom border-body border-navbar d-flex m-3" data-bs-theme="dark">
+            <div>
+              <a class="style-navbar text-light" href="../Index.html">Home</a>
+            </div>
+          </nav>
+        </div>
       </div>
 
       <!-- Section: Design Block -->
-<section class="text-center">
-    <!-- Background image -->
+      <section class="text-center">
+      <!-- Background image -->
 
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8">
@@ -25,33 +36,33 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+                    <input type="text" name="firstName" class="form-control"v-model="firstName" required="" />
+                    <label class="form-label" >First name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+                    <input type="text" name="lastName" class="form-control"v-model="lastName" required="" />
+                    <label class="form-label">Last name</label>
                   </div>
                 </div>
               </div>
   
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                <input type="email" name="email" class="form-control"v-model="email" required="" />
                 <label class="form-label" for="form3Example3">Email address</label>
               </div>
   
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
+                <input type="password" name="password" class="form-control"v-model="password" required="" />
+                <label class="form-label">Password</label>
               </div>
   
   
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-primary btn-block mb-4" @click="register">
                 Sign up
               </button>
   
@@ -74,32 +85,31 @@
             </form>
           </div>
         </div>
-      </div>
     </div>
   </section>
 </div>
-  <footer>
-    <nav class="navbar bg-dark border-bottom border-body d-flex justify-content-center style-margin"
-      data-bs-theme="dark">
+<footer>
+  <nav
+  class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
+    data-bs-theme="dark"
+  >
+  <div>
+    <div class="style-margin d-flex justify-content-center ">
+      <img class="img-footer bg-light rounded-circle m-4" src="../images/png.png" alt="" />
+    </div>
+    <div class="style-margin  d-flex justify-content-center ">
+      <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png" alt=""></a>
+      <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png" alt=""></a>
+      <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes" src="../images/linkedin.png" alt=""></a>
+  </div>
 
-      <div class="d-flex justify-content-center style-margin">
-        <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png"
-            alt=""></a>
-        <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png"
-            alt=""></a>
-        <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes"
-                                                                          src="../images/linkedin.png" alt=""></a>
-      </div>
-      <div>
-        <p class="text-light d-flex justify-content-center style-margin">2023 Todos los derechos reservados By: Brian
-          Ochoa (COHORT 51)</p>
-      </div>
-      <div class="d-flex justify-content-center style-margin">
-        <img class="img-footer" src="../images/png.png" alt="" />
-      </div>
-    </nav>
+    <div>
+      <p class="text-light  d-flex justify-content-center ">2023 Todos los derechos reservados By: Brian Ochoa (COHORT 51)</p>
+  </div>
+</div>
+  </nav>
 
-  </footer>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

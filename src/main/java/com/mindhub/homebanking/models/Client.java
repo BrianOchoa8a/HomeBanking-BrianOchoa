@@ -116,8 +116,8 @@ public class Client {
         return password;
     }
 
-    public void setPasword(String pasword) {
-        this.password = pasword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getAdmin() {

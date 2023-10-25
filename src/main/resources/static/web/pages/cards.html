@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../styles/accounts.css" />
+  <link rel="stylesheet" href="../styles/account.css" />
 
   <title>Tus Cuentas</title>
 </head>
@@ -14,11 +14,15 @@
   <div id="app">
   <header>
     <div>
-      <div class="d-flex justify-content-center">
-        <img class="img-style" src="../images/MONEYpng.png" alt="" />
+      <div>
+        <div class="d-flex justify-content-center bg-color">
+          <img class="img-style  bg-light rounded-circle m-4 " src="../images/MONEYpng.png" alt="" />
+        </div>
+        <div class="d-flex justify-content-center">
+        </div>
       </div>
       <div class="d-flex justify-content-center">
-        <nav class="navbar bg-dark border-bottom border-body border-navbar d-flex" data-bs-theme="dark">
+        <nav class="navbar bg-nav border-bottom border-body border-navbar d-flex m-3" data-bs-theme="dark">
           <div class="container-fluid">
 
             <a class="style-navbar text-light" href="../Index.html">Home</a>
@@ -26,6 +30,9 @@
             <a class="style-navbar text-light" href="#">Cards</a>
           </div>
         </nav>
+        <div>
+          <a href=""  @click="logout" class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+        </div>
       </div>
     </div>
   </header>
@@ -33,11 +40,11 @@
   <div class="d-flex justify-content-center g-col-6 style-title">
     <h1>CARDS</h1>
   </div>
-  <main class="d-flex justify-content-around align-items-center">
+  <main class="d-flex justify-content-center align-items-center align-content-center">
 
-    <section class="d-flex flex-column">
+    <section class="d-flex flex-column justify-content-center">
         <h2 class="pt-4">Credit Card</h2>
-        <div class="d-flex flex-column gap-4 align-items-center m-3 containerCard">
+        <div class="d-flex flex-column gap-4 align-items-center m-3 containerCard ">
             <div v-if="cardCredit.length != 0" v-for="card of cardCredit " class="card" style="width: 18rem;">
                 <div class="card-body ">
                     <h3 class="card-title textCard">{{card.cardHolder}}</h3>
@@ -49,7 +56,9 @@
             <div v-else>
                 <h3>No credit cards</h3>
             </div>
+
         </div>
+
     </section>
 
     <section  class="d-flex flex-column">
@@ -67,34 +76,39 @@
                 <h3>No debit cards</h3>
             </div>
         </div>
+
+        
+
+
     </section>
 
-
-
+    <div class="d-flex justify-content-center bg-info rounded text-light align-content-center">
+      <a class="text-light" href="">New Card</a>
+    </div>
 </main>
 
-  <footer>
-    <nav class="navbar bg-dark border-bottom border-body d-flex justify-content-center style-margin"
-      data-bs-theme="dark">
+<footer>
+  <nav
+  class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
+    data-bs-theme="dark"
+  >
+  <div>
+    <div class="style-margin d-flex justify-content-center ">
+      <img class="img-footer bg-light rounded-circle m-4" src="../images/png.png" alt="" />
+    </div>
+    <div class="style-margin  d-flex justify-content-center ">
+      <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png" alt=""></a>
+      <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png" alt=""></a>
+      <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes" src="../images/linkedin.png" alt=""></a>
+  </div>
 
-      <div class="d-flex justify-content-center style-margin">
-        <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png"
-            alt=""></a>
-        <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png"
-            alt=""></a>
-        <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes"
-                                                                          src="../images/linkedin.png" alt=""></a>
-      </div>
-      <div>
-        <p class="text-light d-flex justify-content-center style-margin">2023 Todos los derechos reservados By: Brian
-          Ochoa (COHORT 51)</p>
-      </div>
-      <div class="d-flex justify-content-center style-margin">
-        <img class="img-footer" src="../images/png.png" alt="" />
-      </div>
-    </nav>
+    <div>
+      <p class="text-light  d-flex justify-content-center ">2023 Todos los derechos reservados By: Brian Ochoa (COHORT 51)</p>
+  </div>
+</div>
+  </nav>
 
-  </footer>
+</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

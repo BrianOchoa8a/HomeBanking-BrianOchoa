@@ -101,7 +101,7 @@ class HomebankingApplication {
 			account1.addTransaction(transaction3);
 			transactionRepository.save(transaction3);
 
-			Transaction transaction4 = new Transaction(DEBIT, 4350.00, "Transferencia", LocalDate.now() );
+			Transaction transaction4 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDate.now() );
 			account2.addTransaction(transaction4);
 			transactionRepository.save(transaction4);
 

@@ -17,7 +17,7 @@ createApp({
         axios.post('/api/login', `email=${this.email}&password=${this.password}`)
         .then( response => {
             console.log(response)
-            // location.pathname="/web/pages/accounts.html"
+            location.pathname="/web/pages/accounts.html"
         })
         .catch(err => console.log(err))
     },

@@ -25,5 +25,11 @@ createApp({
         })
         .catch(err => console.log(err))
     },
+    logout(){
+      axios.post('/api/logout')
+      .then( response => {
+        location.pathname="/web/index.html"
+      })
+    }
   },
 }).mount("#app");
