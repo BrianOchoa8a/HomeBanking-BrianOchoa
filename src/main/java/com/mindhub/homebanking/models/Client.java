@@ -127,4 +127,12 @@ public class Client {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
+
+    public void addCard(Card card){
+        card.setClient(this);
+        cards.add(card);
+    }
+    public String nameCard(){
+        return this.firstName+this.lastName;
+    }
 }

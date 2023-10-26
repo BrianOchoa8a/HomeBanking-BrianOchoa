@@ -18,8 +18,8 @@ public class Card {
     private CardType type;
     @Enumerated(EnumType.STRING)
     private CardColor color;
-    private int number;
-    private int cvv;
+    private String number;
+    private String cvv;
     private LocalDate fromDate;
     private LocalDate thruDate;
 
@@ -30,7 +30,7 @@ public class Card {
 
     public Card(){}
 
-    public Card(String cardHolder, CardType type, CardColor color, int number, int cvv, LocalDate fromDate, LocalDate thruDate) {
+    public Card(String cardHolder, CardType type, CardColor color, String number, String cvv, LocalDate fromDate, LocalDate thruDate) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
@@ -64,19 +64,19 @@ public class Card {
         this.color = color;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public int getCvv() {
+    public String getCvv() {
         return cvv;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(String cvv) {
         this.cvv = cvv;
     }
 

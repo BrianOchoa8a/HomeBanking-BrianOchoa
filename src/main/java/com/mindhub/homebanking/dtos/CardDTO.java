@@ -17,8 +17,8 @@ public class CardDTO {
     private CardType type;
 
     private CardColor color;
-    private int number;
-    private int cvv;
+    private String number;
+    private String cvv;
     private LocalDate fromDate;
     private LocalDate thruDate;
 
@@ -60,19 +60,19 @@ public class CardDTO {
         this.color = color;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public int getCvv() {
+    public String getCvv() {
         return cvv;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(String cvv) {
         this.cvv = cvv;
     }
 

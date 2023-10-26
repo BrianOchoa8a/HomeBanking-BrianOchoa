@@ -20,14 +20,14 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(email -> {
-            Client client = clientRepository.findByEmail(email);
+        auth.userDetailsService(userNameEmail -> {
+            Client client = clientRepository.findByEmail(userNameEmail);
             if (client != null) {
                 return new User(client.getEmail(), client.getPasword(),
                         (client.getAdmin()) ? AuthorityUtils.createAuthorityList("ADMIN")
                                 : AuthorityUtils.createAuthorityList("CLIENT"));
             } else {
-                throw new UsernameNotFoundException("Unknown user: " + email);
+                throw new UsernameNotFoundException("Unknown user: " + userNameEmail);
             }
         });
     }
@@ -37,6 +37,3 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     };
 }
-
-
-

@@ -77,15 +77,15 @@ class HomebankingApplication {
 			loan3.addClientLoan(brianL2);
 			clientLoanRepository.save(brianL2);
 
-			Card card1 = new Card(client.getFirstName(),CardType.CREDIT,GOLD,111222333, 123,LocalDate.now(),LocalDate.now());
+			Card card1 = new Card(client.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123",LocalDate.now(),LocalDate.now());
 			client.addCards(card1);
 			cardRepository.save(card1);
 
-			Card card2 = new Card(client.getFirstName(),CardType.DEBIT,TITANIUM,444555666, 321,LocalDate.now(),LocalDate.now());
+			Card card2 = new Card(client.getFirstName(),CardType.DEBIT,TITANIUM,"444555666", "321",LocalDate.now(),LocalDate.now());
 			client.addCards(card2);
 			cardRepository.save(card2);
 
-			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,111222333, 123,LocalDate.now(),LocalDate.now());
+			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123",LocalDate.now(),LocalDate.now());
 			client2.addCards(card3);
 			cardRepository.save(card3);
 

@@ -3,8 +3,8 @@ let { createApp } = Vue;
 createApp({
   data() {
     return {
-      cardCredit:[],
-      cardDebit:[]
+        credit: [],
+        debit: []
     };
   },
 
@@ -14,16 +14,15 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/1')
+        axios.get('/api/clients/currents')
         .then( ({data}) => {
-          console.log(data);
-          
-          this.cardCredit = data.cards.filter(card => card.type == "CREDIT");
-          console.log(this.cardCredit);
-          this.cardDebit = data.cards.filter(card2 => card2.type == "DEBIT");
-          console.log(this.cardDebit);
+            this.credit = data.cards.filter(card => card.type == "CREDIT");
+            this.debit = data.cards.filter(card => card.type == "DEBIT");
         })
         .catch(err => console.log(err))
+    },
+    dateFormat(date) {
+        return moment(date).format("MM/YY");
     },
     logout(){
       axios.post('/api/logout')
