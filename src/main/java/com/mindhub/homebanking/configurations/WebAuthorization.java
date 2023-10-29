@@ -26,7 +26,7 @@ public class WebAuthorization{
                 .antMatchers(HttpMethod.GET, "/api/clients").hasAuthority("ADMIN")
                 .antMatchers("/web/pages/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/clients/current/cards").authenticated()
-                .anyRequest().denyAll();
+                .anyRequest().permitAll();
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

@@ -1,26 +1,23 @@
-const { createApp } = Vue;
+let { createApp } = Vue;
 
 createApp({
   data() {
     return {
-      id:"",
-      account: [],
+        typeCard: "",
+        colorCard: ""
     };
   },
+
   created(){
-    this.id =  new URLSearchParams(location.search).get("id");
-    this.loadAccount(this.id);
   },
+
   methods:{
-    loadAccount(id){
-        axios.get(`/api/accounts/${id}`)
-        .then(({data}) => {
-            this.account = data;
+    createCard(){
+        axios.post('/api/clients/current/cards', `cardType=${this.typeCard}&cardColor=${this.colorCard}`)
+        .then( () => {
+            location.pathname="/web/pages/cards.html"
         })
         .catch(err => console.log(err))
-    },
-    dateFormat(date) {
-      return moment(date).format('lll');
     },
     logout(){
       axios.post('/api/logout')
@@ -28,5 +25,5 @@ createApp({
         location.pathname="/web/index.html"
       })
     }
-  }
+  },
 }).mount("#app");

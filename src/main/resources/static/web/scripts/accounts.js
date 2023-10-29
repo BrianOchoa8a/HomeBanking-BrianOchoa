@@ -15,7 +15,7 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/1')
+        axios.get('/api/clients/currents')
         .then( ({data}) => {
           console.log(data);
              this.accounts = data.accounts;
@@ -23,6 +23,13 @@ createApp({
              this.loans = data.loans;
         })
         .catch(err => console.log(err))
+    },
+    createAccount() {
+      axios.post('/api/clients/current/accounts')
+      .then( response => {
+        this.loadData();
+      })
+      .catch(err => console.log(err))
     },
     logout(){
       axios.post('/api/logout')
