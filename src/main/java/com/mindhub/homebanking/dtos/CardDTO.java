@@ -26,14 +26,14 @@ public class CardDTO {
     }
 
     public CardDTO(Card card) {
-        id = card.getId();
-        cardHolder = card.getCardHolder();
-        type = card.getType();
-        color = card.getColor();
-        number = card.getNumber();
-        cvv = card.getCvv();
-        fromDate = card.getFromDate();
-        thruDate = card.getThruDate();
+        this.id = card.getId();
+        this.cardHolder = card.getCardHolder();
+        this.type = card.getType();
+        this.color = card.getColor();
+        this.number = card.getNumber();
+        this.cvv = card.getCvv();
+        this.thruDate = card.getThruDate();
+        this.fromDate = card.getFromDate();
     }
 
     public String getCardHolder() {

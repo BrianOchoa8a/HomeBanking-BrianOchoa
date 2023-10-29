@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.mindhub.homebanking.models.CardColor.GOLD;
@@ -77,39 +78,39 @@ class HomebankingApplication {
 			loan3.addClientLoan(brianL2);
 			clientLoanRepository.save(brianL2);
 
-			Card card1 = new Card(client.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123",LocalDate.now(),LocalDate.now());
+			Card card1 = new Card(client.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123", LocalDate.now(), LocalDate.now().plusYears(5));
 			client.addCards(card1);
 			cardRepository.save(card1);
 
-			Card card2 = new Card(client.getFirstName(),CardType.DEBIT,TITANIUM,"444555666", "321",LocalDate.now(),LocalDate.now());
+			Card card2 = new Card(client.getFirstName(),CardType.DEBIT,TITANIUM,"444555666", "321", LocalDate.now(), LocalDate.now().plusYears(5));
 			client.addCards(card2);
 			cardRepository.save(card2);
 
-			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123",LocalDate.now(),LocalDate.now());
+			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123", LocalDate.now(), LocalDate.now().plusYears(5));
 			client2.addCards(card3);
 			cardRepository.save(card3);
 
-			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDate.now() );
+			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDateTime.now() );
 			account1.addTransaction(transaction1);
 			transactionRepository.save(transaction1);
 
-			Transaction transaction2 = new Transaction(CREDIT, -35.00, "Car Fee", LocalDate.now() );
+			Transaction transaction2 = new Transaction(CREDIT, -35.00, "Car Fee", LocalDateTime.now() );
 			account1.addTransaction(transaction2);
 			transactionRepository.save(transaction2);
 
-			Transaction transaction3 = new Transaction(DEBIT, 4350.00, "Netflix", LocalDate.now() );
+			Transaction transaction3 = new Transaction(DEBIT, 4350.00, "Netflix", LocalDateTime.now() );
 			account1.addTransaction(transaction3);
 			transactionRepository.save(transaction3);
 
-			Transaction transaction4 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDate.now() );
+			Transaction transaction4 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDateTime.now() );
 			account2.addTransaction(transaction4);
 			transactionRepository.save(transaction4);
 
-			Transaction transaction5 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDate.now() );
+			Transaction transaction5 = new Transaction(DEBIT, 4350.00, "Transfer", LocalDateTime.now() );
 			account2.addTransaction(transaction5);
 			transactionRepository.save(transaction5);
 
-			Transaction transaction6 = new Transaction(DEBIT, 4350.00, "Deposit", LocalDate.now() );
+			Transaction transaction6 = new Transaction(DEBIT, 4350.00, "Deposit", LocalDateTime.now() );
 			account2.addTransaction(transaction6);
 			transactionRepository.save(transaction6);
 

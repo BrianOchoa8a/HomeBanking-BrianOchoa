@@ -1,14 +1,12 @@
 package com.mindhub.homebanking.models;
 
-import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -16,68 +14,69 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;
-    private Double amount;
+    private double amount;
     private String description;
-    private LocalDate date;
-
+    private LocalDateTime date;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
-    private  Account account;
+    @JoinColumn(name="account_id")
+    private Account account;
 
-    public Transaction(){
-
+    //CONSTRUCTORS
+    public Transaction() {
+    }
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date) {
+        this.type = type;
+        this.amount = amount;
+        this.description = description;
+        this.date = date;
     }
 
-    public Transaction(TransactionType type, Double amount, String description, LocalDate date){
-
-        this.type=type;
-        this.amount=amount;
-        this.description=description;
-        this.date=date;
-
-    }
-
-    public TransactionType getType(){
+    //GETTERS & SETTERS
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(TransactionType type){
-        this.type=type;
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 
-    public Double getAmount(){
+    public double getAmount() {
         return amount;
     }
 
-    public void  setAmount (Double amount){
-        this.amount=amount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description){
-        this.description=description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public  LocalDate getCreationDate (){
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date){
-        this.date=date;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
-    @JsonIgnore
-    public Account getAccount(){
+    //GETTER ID
+    public Long getId() {
+        return id;
+    }
+
+    //GETTERS AND SETTERS @ManyToOne
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(Account account){
-        this.account=account;
+    public void setAccount(Account account) {
+        this.account = account;
     }
-
 
     @Override
     public String toString() {
@@ -90,13 +89,4 @@ public class Transaction {
                 ", account=" + account +
                 '}';
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setAccounts(Account account) {
-        this.account= account;
-    }
-
 }

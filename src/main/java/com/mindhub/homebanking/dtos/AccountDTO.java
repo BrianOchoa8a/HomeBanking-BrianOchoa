@@ -15,11 +15,15 @@ public class AccountDTO {
     private List<TransactionDTO> transactions;
 
     public AccountDTO(Account account){
-        id = account.getId();
-        number = account.getNumber();
-        creationDate = account.getCreationDate();
-        balance = account.getBalance();
-        transactions = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toList());
+        this.id = account.getId();
+        this.number = account.getNumber();
+        this.creationDate = account.getCreationDate();
+        this.balance = account.getBalance();
+        this.transactions = account
+                .getTransactions()
+                .stream()
+                .map(TransactionDTO::new)
+                .collect(Collectors.toList());
     }
 
     public long getId() {

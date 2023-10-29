@@ -21,13 +21,13 @@ public class ClientDTO{
     private List<CardDTO> cards;
 
     public ClientDTO(Client client){
-        id = client.getId();
-        firstName = client.getFirstName();
-        lastName = client.getLastName();
-        email = client.getEmail();
-        accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toList());
-        loans = client.getClientLoans().stream().map(c -> new ClientLoanDTO(c)).collect(Collectors.toList());
-        cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(Collectors.toList());
+       this.id = client.getId();
+        this.firstName = client.getFirstName();
+        this.lastName = client.getLastName();
+        this.email = client.getEmail();
+        this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toList());
+        this.loans = client.getClientLoans().stream().map(c -> new ClientLoanDTO(c)).collect(Collectors.toList());
+        this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(Collectors.toList());
     }
 
 
