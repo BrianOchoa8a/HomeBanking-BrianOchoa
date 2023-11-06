@@ -69,20 +69,20 @@ public class ClientController {
     public ResponseEntity<Object> newClient(
             @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
 
-        if (firstName.isEmpty() || firstName.isBlank()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (firstName.isBlank()) {
+            return new ResponseEntity<>("Missing data: First Name Error", HttpStatus.FORBIDDEN);
         }
 
-        if(lastName.isEmpty() || lastName.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(lastName.isBlank()){
+            return new ResponseEntity<>("Missing data: Last Name Error", HttpStatus.FORBIDDEN);
         }
 
-        if(email.isEmpty() || email.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(email.isBlank()){
+            return new ResponseEntity<>("Missing data: Email Error", HttpStatus.FORBIDDEN);
         }
 
-        if(password.isEmpty() || password.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(password.isBlank()){
+            return new ResponseEntity<>("Missing data: Password Error", HttpStatus.FORBIDDEN);
         }
 
         if (clientRepository.findByEmail(email) != null) {
@@ -104,5 +104,7 @@ public class ClientController {
     public ClientDTO getClientCurrent(Authentication authentication){
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
+
+
 
 }

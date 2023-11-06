@@ -41,7 +41,7 @@ public class TransactionController {
             return new ResponseEntity<>("The amount must be greater than zero", HttpStatus.FORBIDDEN);
         }
 
-        if(description.isEmpty() || description.isBlank() || originAccount.isEmpty() || originAccount.isBlank() || destinationAccount.isEmpty() || destinationAccount.isBlank()){
+        if(description.isBlank() || originAccount.isBlank() || destinationAccount.isBlank()){
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
 

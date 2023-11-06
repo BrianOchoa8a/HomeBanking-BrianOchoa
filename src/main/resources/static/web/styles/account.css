@@ -64,6 +64,7 @@ body{
 .bg-color2{
 
     background-color: #3D30A2;
+    margin-top: 10rem;
     border-top-right-radius: 30rem ;
     border-top-left-radius: 30rem ;
 
@@ -79,4 +80,24 @@ body{
 .w-logout{
 width: 5rem;
 margin-top: 1rem;
+}
+
+.bg-trans{
+    background-color: black;
+    opacity: 4;
+}
+
+.bg-h1{
+
+
+    color: white;
+}
+
+.bg-title{
+    background-color: #3D30A2;
+    margin-bottom: 20rem;
+}
+.img-card2{
+    width: 60rem;
+
 }

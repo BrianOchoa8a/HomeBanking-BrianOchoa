@@ -43,12 +43,11 @@ public class CardController {
 
     public String generateCvvCard() {
         StringBuilder cvvNumber;
-        do {
+
             cvvNumber = new StringBuilder();
             for (byte i = 0; i <= 2; i++) {
                 cvvNumber.append(getRandomNumber(0, 9));
             }
-        } while (cardRepository.existsByCvv(cvvNumber.toString()));
         return cvvNumber.toString();
     }
 
@@ -56,12 +55,12 @@ public class CardController {
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String cardType, @RequestParam String cardColor){
 
-        if (cardType.isEmpty() || cardType.isBlank()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (cardType.isBlank()) {
+            return new ResponseEntity<>("Missing data : Error Type Card", HttpStatus.FORBIDDEN);
         }
 
-        if(cardColor.isEmpty() || cardColor.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(cardColor.isBlank()){
+            return new ResponseEntity<>("Missing data: Error Color Card", HttpStatus.FORBIDDEN);
         }
 
         Client client = clientRepository.findByEmail(authentication.getName());
@@ -72,7 +71,7 @@ public class CardController {
             return new ResponseEntity<>("You cannot have more than three cards of the same type.", HttpStatus.FORBIDDEN);
         }
 
-        Card card = new Card(client.nameCard(), CardType.valueOf(cardType), CardColor.valueOf(cardColor), generateNumberCard(), generateCvvCard(), LocalDate.now().plusYears(5), LocalDate.now());
+        Card card = new Card(client.nameCard(), CardType.valueOf(cardType), CardColor.valueOf(cardColor), generateNumberCard(), generateCvvCard(), LocalDate.now(), LocalDate.now().plusYears(5));
         client.addCard(card);
         cardRepository.save(card);
         clientRepository.save(client);

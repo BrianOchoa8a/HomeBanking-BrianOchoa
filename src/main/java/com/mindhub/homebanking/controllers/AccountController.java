@@ -59,13 +59,17 @@ public class AccountController {
     public AccountDTO getAccount(@PathVariable Long id){
         return accountRepository.findById(id).map(AccountDTO::new).orElse(null);
     }
+    @RequestMapping("/clients/current/accounts")
+    public AccountDTO getNumber(@PathVariable String number){
+        return new AccountDTO(accountRepository.findByNumber(number));
+    }
 
     @PostMapping("/clients/current/accounts")
     public ResponseEntity<Object> newAccount(Authentication authentication){
         Client client = clientRepository.findByEmail(authentication.getName());
 
         if(client.getAccounts().size() >= 3){
-            return new ResponseEntity<>("Cannot create any more accounts for this client", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Cannot create any more accounts", HttpStatus.FORBIDDEN);
         }
 
         Account account = new Account(accountNumber(), LocalDate.now(), 0);

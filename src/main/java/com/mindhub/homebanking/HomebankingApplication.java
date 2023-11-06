@@ -58,6 +58,10 @@ class HomebankingApplication {
 			client.addAccount(account2);
 			accountRepository.save(account2);
 
+			Account account3 = new Account("VIN004", LocalDate.now().plusDays(1), 7500.00);
+			client2.addAccount(account3);
+			accountRepository.save(account3);
+
 			ClientLoan melbaL1 = new ClientLoan(400000.00, 60);
 			client.addClientLoan(melbaL1);
 			loan1.addClientLoan(melbaL1);
@@ -89,6 +93,8 @@ class HomebankingApplication {
 			Card card3 = new Card(client2.getFirstName(),CardType.CREDIT,GOLD,"111222333", "123", LocalDate.now(), LocalDate.now().plusYears(5));
 			client2.addCards(card3);
 			cardRepository.save(card3);
+
+
 
 			Transaction transaction1 = new Transaction(DEBIT, -35000.00, "Transfer", LocalDateTime.now() );
 			account1.addTransaction(transaction1);
