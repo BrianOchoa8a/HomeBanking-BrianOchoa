@@ -21,12 +21,13 @@ public class WebAuthorization{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/web/index.html", "/web/pages/login.html", "/web/pages/register.html", "/web/styles/**", "/web/scripts/**", "/web/images/**", "/clients/current/accounts/**").permitAll()
+                .antMatchers("/web/index.html", "/web/pages/login.html", "/web/pages/register.html", "/web/styles/**", "/web/scripts/**", "/web/images/**").permitAll()
                 .antMatchers("/h2-console/**", "/rest/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/clients").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/loans").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/**").authenticated()
-                .antMatchers("/web/pages/**", "/api/clients/current/**", "/clients/current/accounts/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/clients/current/**", "/clients/current/accounts/**").authenticated()
+                .antMatchers("/web/pages/**", "/api/clients/current/**", "/clients/current/accounts/**","/clients/current/transactions").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/clients/current/**", "/clients/current/accounts/**","/clients/current/transactions").authenticated()
                 .anyRequest().permitAll();
 
         // turn off checking for CSRF tokens
