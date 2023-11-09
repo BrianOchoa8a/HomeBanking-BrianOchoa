@@ -1,10 +1,12 @@
 package com.mindhub.homebanking.controllers;
 
+import antlr.BaseAST;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.ClientService;
 import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -23,20 +25,20 @@ import java.util.stream.Stream;
 @RequestMapping("/api")
 public class ClientController {
 
-    @Autowired
-    private ClientRepository clientRepository;
+   // @Autowired
+    //private ClientRepository clientRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private ClientService clientService;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @RequestMapping("/clients")
     public List<ClientDTO> getAllClients(){
 
-        List<Client> clients = clientRepository.findAll();
+        List<Client> clients = clientService.getAllClients();
         Stream<Client> clientStream = clients.stream();
         Stream<ClientDTO> clientDTOStream = clientStream.map(client -> new ClientDTO(client));
         List<ClientDTO> clientDTOS = clientDTOStream.collect(Collectors.toList());
@@ -49,7 +51,7 @@ public class ClientController {
 
     @RequestMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
-        return clientRepository.findById(id).map(ClientDTO::new).orElse(null);
+        return clientService.findClientDTOById(id);
     }
 
     public int getRandomNumber(int min, int max) {
@@ -85,12 +87,13 @@ public class ClientController {
             return new ResponseEntity<>("Missing data: Password Error", HttpStatus.FORBIDDEN);
         }
 
-        if (clientRepository.findByEmail(email) != null) {
+        if (!clientService.existsClientByEmail(email)) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
+
         Client client = new Client(firstName,lastName,email, passwordEncoder.encode(password), false);
-        clientRepository.save(client);
+        clientService.saveClient(client);
 
         Account account = new Account(accountNumber(), LocalDate.now(), 0);
         client.addAccount(account);
@@ -102,7 +105,7 @@ public class ClientController {
 
     @RequestMapping("/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication){
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+        return new ClientDTO(clientService.findClientByEmail(authentication.getName()));
     }
 
 

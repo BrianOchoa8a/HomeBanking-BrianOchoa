@@ -21,14 +21,14 @@ import static com.mindhub.homebanking.models.TransactionType.DEBIT;
 @SpringBootApplication
 class HomebankingApplication {
 
-	@Autowired
-	private PasswordEncoder PasswordEncoder;
+	//@Autowired
+	//private PasswordEncoder PasswordEncoder;
 
 	public static void main(String[] args){
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loansRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository,PasswordEncoder passwordEncoder){
+		/*@Bean
+public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loansRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository,PasswordEncoder passwordEncoder){
 		return args -> {
 			System.out.println("Hola");
 
@@ -130,6 +130,6 @@ class HomebankingApplication {
 			System.out.println(transaction1);
 
 		};
-	}
+	}*/
 
 }
