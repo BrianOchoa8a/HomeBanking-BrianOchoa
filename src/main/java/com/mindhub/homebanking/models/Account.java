@@ -18,6 +18,8 @@ public class Account {
     private String number;
     private LocalDate creationDate;
     private double balance;
+    private Boolean active = true;
+    private AccountType accountType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
@@ -29,10 +31,12 @@ public class Account {
     //CONSTRUCTORS
     public Account() {
     }
-    public Account(String number, LocalDate creationDate, double balance) {
+    public Account(String number, LocalDate creationDate, double balance, Boolean active, AccountType accountType) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.active = active;
+        this.accountType= accountType;
     }
 
     //GETTER & SETTERS
@@ -77,6 +81,22 @@ public class Account {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     //FUNCTION TO LINK

@@ -19,6 +19,7 @@ public class Loan {
 
     private String name;
     private Double maxAmount;
+    private Double porcentageInterest;
 
     @ElementCollection
     private List<Integer> payments = new ArrayList<>();
@@ -30,10 +31,11 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(String name, Double maxAmount, List<Integer> payments) {
+    public Loan(String name, Double maxAmount, List<Integer> payments, Double porcentageInterest) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
+        this.porcentageInterest= porcentageInterest;
     }
 
 
@@ -74,6 +76,13 @@ public class Loan {
         return clientLoans;
     }
 
+    public Double getPorcentageInterest() {
+        return porcentageInterest;
+    }
+
+    public void setPorcentageInterest(Double porcentageInterest) {
+        this.porcentageInterest = porcentageInterest;
+    }
 
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);

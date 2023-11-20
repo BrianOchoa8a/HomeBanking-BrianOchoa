@@ -29,11 +29,12 @@
             <a class="style-navbar text-light" href="../accounts.html">Accounts</a>
             <a class="style-navbar text-light" href="../pages/cards.html">Cards</a>
             <a class="style-navbar text-light" href="./transfers.html">Transfer</a>
+            <a href=""  @click="logout" class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
 
           </div>
         </nav>
         <div>
-          <a href=""  @click="logout" class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+         
         </div>
       </div>
     </div>
@@ -113,5 +114,6 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../scripts/create-cards.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

@@ -26,10 +26,11 @@
             <a class="style-navbar text-light" href="../Index.html">Home</a>
             <a class="style-navbar text-light" href="./accounts.html">Accounts</a>
             <a class="style-navbar text-light" href="./cards.html">Cards</a>
+            <a href=""  @click="logout"  class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
           </div>
         </nav>
         <div>
-          <a href=""  @click="logout"  class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+          
         </div>
       </div>
     </div>
@@ -40,13 +41,16 @@
 
   <div class="d-flex justify-content-center g-col-6 style-title">
   </div>
-  <main id="app" class="d-flex flex-wrap justify-content-around align-items-center pt-5 contenedor-main ">
+<div class="d-flex justify-content-center"><img src="../images/1625579.png" class="img-fluid rounded-start  img-card imh-transfer" alt=""></div>
+
+      
+  <main id="app" class="d-flex flex-wrap justify-content-center align-items-center pt-5 contenedor-main ">
 
    
 
-    <div class="contenedor-form">
+    <div class="contenedor-form d-flex justify-content-center">
 
-        <form class="d-flex flex-column shadow p-3 mb-5 bg-white rounded">
+        <form class="d-flex flex-column shadow p-3 mb-5 bg-white rounded justify-content-center">
             <div class="d-flex gap-2 contenedor-radios mt-3">
                 <div>
                     <h6>Destination Type</h6>
@@ -134,5 +138,6 @@ crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../scripts/transfers.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

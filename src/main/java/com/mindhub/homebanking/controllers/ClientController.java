@@ -3,9 +3,11 @@ package com.mindhub.homebanking.controllers;
 import antlr.BaseAST;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
 import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,9 @@ import java.util.stream.Stream;
 @RequestMapping("/api")
 public class ClientController {
 
-   // @Autowired
-    //private ClientRepository clientRepository;
+    @Autowired
+    private AccountService accountService;
+
 
     @Autowired
     private ClientService clientService;
@@ -35,7 +38,7 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getAllClients(){
 
         List<Client> clients = clientService.getAllClients();
@@ -49,7 +52,7 @@ public class ClientController {
 
 
 
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientService.findClientDTOById(id);
     }
@@ -60,7 +63,7 @@ public class ClientController {
 
     public String accountNumber(){
         String numberAccount = "VIN" + String.valueOf(getRandomNumber(0, 999));
-        while (accountRepository.existsByNumber(numberAccount)){
+        while (accountService.existsAccountByNumber(numberAccount)){
             numberAccount = "VIN" + String.valueOf(getRandomNumber(0, 999));
         }
         return numberAccount;
@@ -87,7 +90,7 @@ public class ClientController {
             return new ResponseEntity<>("Missing data: Password Error", HttpStatus.FORBIDDEN);
         }
 
-        if (!clientService.existsClientByEmail(email)) {
+        if (clientService.existsClientByEmail(email)) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
@@ -95,15 +98,15 @@ public class ClientController {
         Client client = new Client(firstName,lastName,email, passwordEncoder.encode(password), false);
         clientService.saveClient(client);
 
-        Account account = new Account(accountNumber(), LocalDate.now(), 0);
+        Account account = new Account(accountNumber(), LocalDate.now(), 0,true, AccountType.SAVING);
         client.addAccount(account);
 
-        accountRepository.save(account);
+        accountService.saveAccount(account);
 
         return new ResponseEntity<>("Client created successfully", HttpStatus.CREATED);
     }
 
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication){
         return new ClientDTO(clientService.findClientByEmail(authentication.getName()));
     }

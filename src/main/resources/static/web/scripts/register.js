@@ -24,11 +24,17 @@ createApp({
                             console.log(response)
                             location.pathname = "/web/pages/accounts.html"
                          })
-                         .catch(err => console.log(err))
+                         .catch(err => {Swal.fire({
+                            title: "Error",
+                            text: err.response.data,
+                            icon: "error"
+                          })})
                 })
-                .catch((error) => {
-                    console.error("Error registering user:", error);
-                });
+                .catch((error) => {Swal.fire({
+                    title: "Error",
+                    text: err.response.data,
+                    icon: "error"
+                  })});
         },
     }
 }).mount("#app");

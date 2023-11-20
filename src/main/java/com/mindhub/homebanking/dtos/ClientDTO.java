@@ -18,16 +18,16 @@ public class ClientDTO{
 
         private List<ClientLoanDTO> loans;
 
-    private List<CardDTO> cards;
+        private List<CardDTO> cards;
 
     public ClientDTO(Client client){
        this.id = client.getId();
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
-        this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toList());
+        this.accounts = client.getAccounts().stream().filter(account -> account.getActive()).map(account -> new AccountDTO(account)).collect(Collectors.toList());
         this.loans = client.getClientLoans().stream().map(c -> new ClientLoanDTO(c)).collect(Collectors.toList());
-        this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(Collectors.toList());
+        this.cards = client.getCards().stream().filter(card -> card.getActive()).map(card -> new CardDTO(card)).collect(Collectors.toList());
     }
 
 

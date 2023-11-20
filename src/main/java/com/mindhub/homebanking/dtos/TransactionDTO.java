@@ -14,12 +14,17 @@ public class TransactionDTO {
     private String description;
     private LocalDateTime date;
 
+    private Double currentBalance;
+    private Boolean active;
+
     public TransactionDTO(Transaction transaction) {
         this.id = transaction.getId();
         this.type = transaction.getType();
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
         this.date = transaction.getDate();
+        this.currentBalance= transaction.getCurrentBalance();
+        this.active=transaction.getActive();
     }
 
     public  Long getId(){return id;};
@@ -27,4 +32,12 @@ public class TransactionDTO {
     public  Double getAmount(){return amount;};
     public  String getDescription(){return description;};
     public  LocalDateTime getDate(){return date;};
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public Double getCurrentBalance() {
+        return currentBalance;
+    }
 }

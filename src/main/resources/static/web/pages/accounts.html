@@ -12,102 +12,143 @@
 
 <body>
   <div id="app">
-  <header >
-    <div>
+    <header>
       <div>
-        <div class="d-flex justify-content-center bg-color">
-          <img class="img-style  bg-light rounded-circle m-4 " src="../images/MONEYpng.png" alt="" />
-        </div>
-        <div class="d-flex justify-content-center">
-        </div>
-      </div>
-      <div class="d-flex justify-content-center align-content-center">
-        <nav class="navbar bg-nav border-bottom border-body border-navbar d-flex m-3" data-bs-theme="dark">
-          <div class="container-fluid d-flex justify-content-center">
-            <a class="style-navbar text-light" href="../Index.html">Home</a>
-            <a class="style-navbar text-light" href="./cards.html">Cards</a>
-            <a class="style-navbar text-light" href="./transfers.html">Transfer</a>
-          </div>
-        </nav>
         <div>
-          <a href=""  @click="logout"  class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+          <div class="d-flex justify-content-center bg-color">
+            <img class="img-style  bg-light rounded-circle m-4 " src="../images/MONEYpng.png" alt="" />
+          </div>
+          <div class="d-flex justify-content-center">
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-content-center">
+          <nav class="navbar bg-nav border-bottom border-body border-navbar d-flex m-3" data-bs-theme="dark">
+            <div class="container-fluid d-flex justify-content-center">
+              <a class="style-navbar text-light" href="../Index.html">Home</a>
+              <a class="style-navbar text-light" href="./cards.html">Cards</a>
+              <a class="style-navbar text-light" href="./transfers.html">Transfer</a>
+              <a href="" @click="logout" class="d-flex justify-content-center"><img
+                  class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+            </div>
+          </nav>
+          <div>
+
+          </div>
         </div>
       </div>
-    </div>
-    <div class="d-flex justify-content-center style-title bg-title">
-      <h1 class=" bg-h1">{{name}} BEADS!</h1>
-    </div>
-  </header>
+      <div class="d-flex justify-content-center style-title bg-title">
+        <h1 class=" bg-h1">{{name}} BEADS!</h1>
+      </div>
+    </header>
 
 
-  <main>
-    <h1 class="m-4 text-center welcome"></h1>
-    <div class="d-flex justify-content-center flex-wrap gap-4">
-        <div v-for="account of accounts" class="card cardAcount m-2 rounded" style="width: 18rem;">
+    <main>
+      <h1 class="m-4 text-center welcome"></h1>
+      <div class="d-flex flex-wrap">
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+          <div v-for="account of accounts" class="card cardAcount m-2 rounded" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title bg-nav text-light rounded d-flex justify-content-center">Account number: {{account.number}} </h5>
+              <small style="text-align: end;">{{account.accountType}} ACCOUNT</small>
+              <h5 class="card-title bg-nav text-light rounded d-flex justify-content-center">Account number:
+                {{account.number}} </h5>
               <h6 class="card-subtitle mt-2 text-body-secondary">Amount</h6>
               <p class="card-text"> $ {{account.balance}}</p>
               <p class="card-text"><span>Creation date</span>: {{account.creationDate}}</p>
-              <a :href="`./account.html?id=${account.id}`" class="aAcounts m-0">See yours moviments <i class="bi bi-chevron-right"></i></a>
             </div>
+            <button class="btn btn-info"><a :href="`./account.html?id=${account.id}`" class=" text-light">See yours
+                moviments</a></button>
+            <button class="btn btn-danger" @click.prevent="deleteAccoun(account.number)"
+              v-model="cardId">Delete</button>
+          </div>
         </div>
         <div class="d-flex justify-content-center pt-4">
-          <a type="button" class="aAcounts" @click="createAccount" v-if="accounts.length < 3">Create New Account <i class="bi bi-chevron-right"></i></a>
-      </div>
-    <div class="mt-5 d-flex flex-column align-items-center  bg-light m-5 rounded">
-        <h3 class="welcome mb-3 ">Acquired Loans</h3>
-        <table v-if="loans.length > 0" class="table">
+          <a type="button" class="aAcounts"v-if="accounts.length < 3" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Account <i
+              class="bi bi-chevron-right"></i></a>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <select name="" id="" v-model="accountType">
+                  <option value="">
+                    Selected account type
+                  </option>
+                  <option value="SAVING">SAVING</option>
+                  <option value="CURRENT">CURRENT</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancell</button>
+                <button type="button" class="btn btn-primary"  @click="createAccount" >Create account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 d-flex flex-column align-items-center  bg-light m-5 rounded scrollable-div">
+          <h3 class="welcome mb-3 ">Acquired Loans</h3>
+          <table v-if="loans.length > 0" class="table">
             <thead>
-                <tr class="headerRow">
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th class=" text-center">N° Quotas</th>
-                </tr>
+              <tr class="headerRow">
+                <th>Type</th>
+                <th>Amount</th>
+                <th class=" text-center">N° Quotas</th>
+              </tr>
             </thead>
             <tbody>
-                <tr class="rowBorder" v-for="loan of loans">
-                    <td>{{ loan.name }}</td>
-                    <td>{{ loan.amount }}</td>
-                    <td class="text-center">{{ loan.payments }}</td>
-                </tr>
+              <tr class="rowBorder" v-for="loan of loans">
+                <td>{{ loan.name }}</td>
+                <td>{{ loan.amount }}</td>
+                <td class="text-center">{{ loan.payments }}</td>
+              </tr>
             </tbody>
             <a type="button" class="btn btn-primary" href="./loan-application.html">Apply</a>
-        </table>
-        <h4 v-else>you don't have loans</h4>
-    </div>
-</main>
+          </table>
+          <h4 v-else>you don't have loans</h4>
+        </div>
+      </div>
+    </main>
 
-<nav
-class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
-  data-bs-theme="dark"
->
-<footer>
-  <nav
-  class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
-    data-bs-theme="dark"
-  >
-  <div>
-    <div class="style-margin d-flex justify-content-center ">
-      <img class="img-footer bg-light rounded-circle m-4" src="../images/png.png" alt="" />
-    </div>
-    <div class="style-margin  d-flex justify-content-center ">
-      <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png" alt=""></a>
-      <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png" alt=""></a>
-      <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes" src="../images/linkedin.png" alt=""></a>
+    <nav class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
+      data-bs-theme="dark">
+      <footer>
+        <nav class="navbar bg-color2  bg-opacity-75 border-bottom border-body d-flex justify-content-center"
+          data-bs-theme="dark">
+          <div>
+            <div class="style-margin d-flex justify-content-center ">
+              <img class="img-footer bg-light rounded-circle m-4" src="../images/png.png" alt="" />
+            </div>
+            <div class="style-margin  d-flex justify-content-center ">
+              <a href="https://www.facebook.com/brian.ochoa.3386"><img class="style-redes" src="../images/facebook.png"
+                  alt=""></a>
+              <a href="https://www.instagram.com/brian.ochoa.14/"><img class="style-redes" src="../images/instagram.png"
+                  alt=""></a>
+              <a href="https://www.linkedin.com/in/brian-ochoa-43605520a/"><img class="style-redes"
+                  src="../images/linkedin.png" alt=""></a>
+            </div>
+
+            <div>
+              <p class="text-light  d-flex justify-content-center ">2023 Todos los derechos reservados By: Brian Ochoa
+                (COHORT 51)</p>
+            </div>
+          </div>
+        </nav>
+
+      </footer>
   </div>
-
-    <div>
-      <p class="text-light  d-flex justify-content-center ">2023 Todos los derechos reservados By: Brian Ochoa (COHORT 51)</p>
-  </div>
-</div>
-  </nav>
-
-</footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../scripts/accounts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../scripts/accounts.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

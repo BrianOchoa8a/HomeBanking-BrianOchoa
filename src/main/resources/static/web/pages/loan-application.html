@@ -26,64 +26,69 @@
             <a class="style-navbar text-light" href="../Index.html">Home</a>
             <a class="style-navbar text-light" href="./accounts.html">Accounts</a>
             <a class="style-navbar text-light" href="./cards.html">Cards</a>
+            <a href=""  @click="logout"  class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
+          </div>
+        </div>
           </div>
         </nav>
         <div>
-          <a href=""  @click="logout"  class="d-flex justify-content-center"><img class="bg-light rounded-circle w-logout" src="../images/logout.png" alt=""></a>
-        </div>
-      </div>
+         
     </div>
     <div class="d-flex justify-content-center style-title bg-title">
-      <h1 class=" bg-h1">MAKE TRANSACTION</h1>
+      <h1 class=" bg-h1">Loan Application</h1>
     </div>
   </header>
 
   <div class="d-flex justify-content-center g-col-6 style-title">
   </div>
-  <main id="app" class="d-flex flex-wrap justify-content-around align-items-center pt-5 contenedor-main ">
+  <main id="app" class="d-flex flex-wrap justify-content-around align-items-center pt-5 contenedor-main">
     <body>
-        <div class="container">
-            <h1 class="mt-4">Loan Application</h1>
-            <form id="loanForm" class="mt-4">
-                <div class="form-group">
-                    <label for="loanType">Loan Type:</label>
-                    <select class="form-control" id="loanType" name="loanType">
-                        <option value="personal">Personal Loan</option>
-                        <option value="mortgage">Mortgage Loan</option>
-                        <option value="auto">Auto Loan</option>
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="availablePayments">Available Payments:</label>
-                    <select class="form-control" id="availablePayments" name="availablePayments">
-                        <option value="12">12</option>
-                        <option value="24">24</option>
-                        <option value="36">36</option>
-                        <!-- Agregar más opciones según sea necesario -->
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="loanAmount">Loan Amount:</label>
-                    <input type="number" class="form-control" id="loanAmount" name="loanAmount" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="destinationAccount">Destination Account:</label>
-                    <input type="text" class="form-control" id="destinationAccount" name="destinationAccount" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="interestRate">Interest Rate (%):</label>
-                    <input type="number" class="form-control" id="interestRate" name="interestRate" step="0.01" required>
-                </div>
-    
-                <button type="button" class="btn btn-primary" id="calculateButton">Calculate Payments</button>
-    
-                <div class="mt-3" id="result"></div>
-            </form>
-        </div
+
+        <div class="container  bg-title rounded text-light">
+          <form class="d-flex flex-column align-items-center justify-content-center contenedor-form">
+            {{metodo}}
+            {{typeloan}}
+            {{capturarValorCuota}}
+            {{maxAmount}}
+          
+            <div class="form-group">
+              <label for="loanType">Select Loan:</label>
+              <select class="form-control" @click="loans()" v-model="TypeLoan" id="loanType">
+                <option v-for="loan of loansAvailable" :value="loan">{{loan.name}} (Max Amount:{{loan.maxAmount}} interest:{{(loan.porcentageInterest *100)}}%)</option>
+              </select>
+            </div>
+          
+            <div class="form-group">
+              <label for="amount">Amount<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="amount" name="amount" v-model="amount">
+            </div>
+          
+            <div class="form-group">
+              <label for="sourceAccount">Source account</label>
+              <select class="form-control" @click="accounts()" v-model="accountTransfer" id="sourceAccount">
+                <option v-for="account in accountsOwn" :value="account">{{account}}</option>
+              </select>
+            </div>
+          
+            <div class="form-group">
+              <label for="payments">Payments</label>
+              <select class="form-control" v-model="payments" id="payments">
+                <template v-for="cuota of loansAvailableCoutas">
+                  <option :value="cuota">{{cuota}}</option>
+                </template>
+              </select>
+              <span style="color: rgb(255, 0, 0);">{{advertencia}}</span>
+              <div class="badge-light border justify-content-center align-content-center">
+                <h6>Amount per installment-</h6>
+                <div class="bg-light d-flex justify-content-center align-content-center"><span>{{calculateQuota}}</span></div>
+              </div>
+
+            </div>
+          
+            <button class="btn btn-primary" @click.prevent="newloan()">Apply</button>
+          </form>
+          
+          </div>
 </main>
 
 <nav
@@ -118,5 +123,6 @@ crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../scripts/loan-application.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

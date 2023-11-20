@@ -3,19 +3,15 @@ let { createApp } = Vue;
 createApp({
     data() {
         return {
-            loansAvailable: [],
-            accountsOwn: [],
-            TypeLoan: "",
-            amount: "",
-            accountTransfer: "",
-            payments: "",
-            loansAvailableCoutas: [],
-            calculateQuota: "",
-            advertencia: "",
+            name:"",
+            maxAmount:0,
+            porcentageInterest:0,
+            payments: []
+
         };
     },
     created() {
-
+        this.loans();
     },
     methods: {
         loans() {
@@ -40,14 +36,8 @@ createApp({
                     icon: "error"
                   })})
         },
-        newloan() {
-            axios.post("/api/loans", {
-                id: this.TypeLoan.id,
-                amount: this.amount,
-                payments: this.payments,
-                numberAccount: this.accountTransfer,
-
-            }
+        newloanAdmin() {
+            axios.post("/admin/loans",  `name=${this.name}&maxAmount=${this.maxAmount}&porcentageInterest=${this.porcentageInterest}&payments=${this.payments}`
             ).then((response) => {
                 Swal.fire({
                     title: "Are you sure?",
@@ -59,12 +49,12 @@ createApp({
                     confirmButtonText: "Yes, Create it!"
                   }).then((result) => {
                     Swal.fire({
-                        title: "Your Loan was approved",
+                        title: "Your Loan created",
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                       }).then((result) => {
                         if (result.isConfirmed) {
-                            location.pathname = "/web/pages/loan-application.html";
+                            location.pathname = "/web/pages/loan-admin.html";
                         }
                       });
                     }

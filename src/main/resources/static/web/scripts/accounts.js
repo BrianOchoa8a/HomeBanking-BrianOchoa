@@ -5,7 +5,8 @@ createApp({
     return {
         accounts: [],
         name:"",
-        loans:[]
+        loans:[],
+        accountType:""
     };
   },
 
@@ -24,8 +25,45 @@ createApp({
         })
         .catch(err => console.log(err))
     },
+    deleteAccoun(number){
+      Swal.fire({
+          title: 'Are you sure to delete this card?',
+          text: 'This action cannot be reversed',
+          showCancelButton: true,
+          cancelButtonText: 'Cancell',
+          confirmButtonText: 'Yes',
+          confirmButtonColor: '#28a745',
+          cancelButtonColor: '#dc3545',
+          showClass: {
+            popup: 'swal2-noanimation',
+            backdrop: 'swal2-noanimation'
+          },
+          hideClass: {
+            popup: '',
+            backdrop: ''
+      }, preConfirm: () => {
+      axios.patch(`/api/account/modify`, `number=${number}`)
+          .then(() => {
+              Swal.fire({
+                  icon: 'success',
+                  text: 'Your account was deleted',
+                  showConfirmButton: false,
+                  timer: 2000,
+              })
+              this.loadData();
+          })
+          .catch(error => {
+              Swal.fire({
+                icon: 'error',
+                text: error.response.data,
+                confirmButtonColor: "#7c601893",
+              });
+      });
+      },
+  })
+  },
     createAccount() {
-      axios.post('/api/clients/current/accounts')
+      axios.post('/api/clients/current/accounts', `accountType=${this.accountType}`)
       .then( response => {
         this.loadData();
       })
