@@ -86,7 +86,7 @@ body{
 }
 
 .bg-nav{
-    background-color: #190482;
+    background-color: #012868;
 }
 
 .margin-login{
@@ -108,7 +108,7 @@ width: 3rem;
 }
 
 .bg-title{
-    background-color: #3D30A2;
+    background-color: #0a062a;
     margin-bottom: 1rem;
 }
 .img-card2{
@@ -290,7 +290,7 @@ width: 3rem;
 }
 
 .scrollable-div {
-  width: 300px; /* Ancho del div */
+  width: 700px; /* Ancho del div */
   height: 400px; /* Altura del div */
   overflow: auto; /* Hace que el div sea scrollable */
   border: 1px solid #ccc; /* Borde para mayor claridad */
@@ -310,3 +310,4 @@ width: 3rem;
   text-decoration: line-through;
   color: red;
 }
+

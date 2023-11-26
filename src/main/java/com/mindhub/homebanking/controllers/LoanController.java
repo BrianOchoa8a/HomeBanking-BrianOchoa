@@ -66,7 +66,7 @@ public class LoanController {
 
         Transaction credit = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), "loan " + loan.getName() + " loan approved", LocalDateTime.now(),accountOrigen.getBalance()+loanApplicationDTO.getAmount(), true);
 
-        ClientLoan prestamo = new ClientLoan(amount1, loanApplicationDTO.getPayments());
+        ClientLoan prestamo = new ClientLoan(amount1, loanApplicationDTO.getPayments(),amount1,loanApplicationDTO.getPayments());
 
         accountOrigen.setBalance(accountOrigen.getBalance() + loanApplicationDTO.getAmount());
         accountOrigen.addTransaction(credit);

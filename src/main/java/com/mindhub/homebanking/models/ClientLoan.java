@@ -3,6 +3,7 @@ package com.mindhub.homebanking.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 public class ClientLoan {
@@ -13,6 +14,9 @@ public class ClientLoan {
 
     private Double amount;
     private Integer payments;
+
+    private Double remainAmount;
+    private Integer remainPayments;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -25,9 +29,11 @@ public class ClientLoan {
 
     public ClientLoan() {
     }
-    public ClientLoan(Double amount, Integer payments) {
+    public ClientLoan(Double amount, Integer payments, Double remainAmount, Integer remainPayments) {
         this.amount = amount;
         this.payments = payments;
+        this.remainAmount=remainAmount;
+        this.remainPayments=remainPayments;
     }
 
 
@@ -62,6 +68,22 @@ public class ClientLoan {
 
     public Loan getLoan() {
         return loan;
+    }
+
+    public Double getRemainAmount() {
+        return remainAmount;
+    }
+
+    public void setRemainAmount(Double remainAmount) {
+        this.remainAmount = remainAmount;
+    }
+
+    public Integer getRemainPayments() {
+        return remainPayments;
+    }
+
+    public void setRemainPayments(Integer remainPayments) {
+        this.remainPayments = remainPayments;
     }
 
     public void setLoan(Loan loan) {

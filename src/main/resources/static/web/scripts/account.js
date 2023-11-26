@@ -13,6 +13,12 @@ createApp({
     this.loadAccount();
   },
   methods:{
+
+    back: function() {
+      // Redirigir a la URL especificada
+      window.location.href = "./accounts.html"; // Reemplaza con la URL a la que deseas redirigir
+  },
+
     loadAccount(){
         axios.get("/api/clients/current")
         .then(({data}) => {

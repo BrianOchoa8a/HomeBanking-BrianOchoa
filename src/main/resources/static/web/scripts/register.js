@@ -15,6 +15,10 @@ createApp({
     },
 
     methods: {
+        redireccionar: function() {
+            // Redirigir a la URL especificada
+            window.location.href = "../Index.html"; // Reemplaza con la URL a la que deseas redirigir
+        },
         register() {
             axios.post("/api/clients", `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`)
                 .then((response) => {

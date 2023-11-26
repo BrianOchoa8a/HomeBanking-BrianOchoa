@@ -30,22 +30,22 @@ class HomebankingApplication {
 		@Bean
 public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loansRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository,PasswordEncoder passwordEncoder){
 		return args -> {
-			System.out.println("Hola");
+		/*	System.out.println("Hola");
 
-			Client client = new Client("MELBA", "Morel", "melbamorel98@gmail.com",  passwordEncoder.encode("Melba123"), false);
+			Client client = new Client("MELBA", "Morel", "melbamorel98@gmail.com",  passwordEncoder.encode("Melba123"), true);
 			clientRepository.save(client);
 
 			Client client2 = new Client("brian", "Ochoa", "brianezequiel@gmail.com", passwordEncoder.encode("Brian123"), false);
 			clientRepository.save(client2);
 
-			Loan loan1 = new Loan( "mortgage", 500.000,List.of(12,24,36,48,60),0.30);
+			Loan loan1 = new Loan( "mortgage", 500000.00,List.of(12,24,36,48,60),0.30);
 			loansRepository.save(loan1);
 
 
-			Loan loan2 =new Loan("Peronal", 100.000, List.of(6,12,24),0.4);
+			Loan loan2 =new Loan("Peronal", 100000.00, List.of(6,12,24),0.4);
 			loansRepository.save(loan2);
 
-			Loan loan3 =new Loan("Automotive", 300.000, List.of(6,12,24,36),0.1);
+			Loan loan3 =new Loan("Automotive", 300000.00, List.of(6,12,24,36),0.1);
 			loansRepository.save(loan3);
 
 			Client client4 = new Client();
@@ -65,22 +65,22 @@ public CommandLineRunner initData(ClientRepository clientRepository, AccountRepo
 			client2.addAccount(account3);
 			accountRepository.save(account3);
 
-			ClientLoan melbaL1 = new ClientLoan(400000.00, 60);
+			ClientLoan melbaL1 = new ClientLoan(400000.00, 60,400000.00, 60);
 			client.addClientLoan(melbaL1);
 			loan1.addClientLoan(melbaL1);
 			clientLoanRepository.save(melbaL1);
 
-			ClientLoan melbaL2 = new ClientLoan(50.000, 12);
+			ClientLoan melbaL2 = new ClientLoan(50.000, 12,50.000, 12);
 			client.addClientLoan(melbaL2);
 			loan2.addClientLoan(melbaL2);
 			clientLoanRepository.save(melbaL2);
 
-			ClientLoan brianL1 = new ClientLoan(100000.00, 24);
+			ClientLoan brianL1 = new ClientLoan(100000.00, 24,100000.00, 24);
 			client2.addClientLoan(brianL1);
 			loan2.addClientLoan(brianL1);
 			clientLoanRepository.save(brianL1);
 
-			ClientLoan brianL2 = new ClientLoan(200.000, 36);
+			ClientLoan brianL2 = new ClientLoan(200.000, 36,200.000, 36);
 			client2.addClientLoan(brianL2);
 			loan3.addClientLoan(brianL2);
 			clientLoanRepository.save(brianL2);
@@ -127,11 +127,12 @@ public CommandLineRunner initData(ClientRepository clientRepository, AccountRepo
 
 
 
+
 			System.out.println(client);
 			System.out.println(account1);
 			System.out.println(account2);
 			System.out.println(transaction1);
-
+*/
 		};
 	}
 

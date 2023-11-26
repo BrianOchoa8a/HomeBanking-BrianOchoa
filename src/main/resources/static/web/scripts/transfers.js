@@ -38,6 +38,14 @@ createApp({
                     text: err.response.data,
                     icon: "error"
                   })})
-        }
+        },
+        logout(){
+            axios.post('/api/logout')
+            .then( response => {
+              location.pathname="/web/Index.html"
+            })      
+            .catch(err => console.log(err))
+          },
+        
     },
 }).mount('#app');

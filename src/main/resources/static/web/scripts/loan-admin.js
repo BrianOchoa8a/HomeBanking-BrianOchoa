@@ -14,6 +14,10 @@ createApp({
         this.loans();
     },
     methods: {
+        redireccionar: function() {
+            // Redirigir a la URL especificada
+            window.location.href = "../Index.html"; // Reemplaza con la URL a la que deseas redirigir
+        },
         loans() {
             axios.get("/api/loans")
                 .then((response) => {
@@ -36,8 +40,8 @@ createApp({
                     icon: "error"
                   })})
         },
-        newloanAdmin() {
-            axios.post("/admin/loans",  `name=${this.name}&maxAmount=${this.maxAmount}&porcentageInterest=${this.porcentageInterest}&payments=${this.payments}`
+        createNewLoan() {
+            axios.post("/api/admin/loans",  `name=${this.name}&maxAmount=${this.maxAmount}&porcentageInterest=${this.porcentageInterest}&payments=${this.payments}`
             ).then((response) => {
                 Swal.fire({
                     title: "Are you sure?",
@@ -94,6 +98,14 @@ createApp({
                 this.advertencia = ""
             }
 
-        }
+        },
+        logout(){
+            axios.post('/api/logout')
+            .then( response => {
+              location.pathname="/web/index.html"
+            })
+          }
+
     }
-}).mount('#app');
+    }
+).mount('#app');

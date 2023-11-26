@@ -40,13 +40,7 @@ public class ClientController {
 
     @GetMapping("/clients")
     public List<ClientDTO> getAllClients(){
-
-        List<Client> clients = clientService.getAllClients();
-        Stream<Client> clientStream = clients.stream();
-        Stream<ClientDTO> clientDTOStream = clientStream.map(client -> new ClientDTO(client));
-        List<ClientDTO> clientDTOS = clientDTOStream.collect(Collectors.toList());
-
-        return clientDTOS;
+        return clientService.getAllClients().stream().map(client -> new ClientDTO(client)).collect(Collectors.toList());
     }
 
 

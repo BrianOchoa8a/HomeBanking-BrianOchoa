@@ -15,6 +15,10 @@ createApp({
   },
 
   methods:{
+    redireccionar2: function() {
+      // Redirigir a la URL especificada
+      window.location.href = "../Index.html"; // Reemplaza con la URL a la que deseas redirigir
+  },
     loadData(){
         axios.get('/api/clients/current')
         .then( ({data}) => {
@@ -69,11 +73,13 @@ createApp({
       })
       .catch(err => console.log(err))
     },
+
     logout(){
       axios.post('/api/logout')
       .then( response => {
-        location.pathname="/web/index.html"
-      })
-    }
+        location.pathname="/web/Index.html"
+      })      
+      .catch(err => console.log(err))
+    },
   },
 }).mount("#app");
